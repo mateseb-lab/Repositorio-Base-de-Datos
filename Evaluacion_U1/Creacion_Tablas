@@ -1,0 +1,44 @@
+-- CLIENTE
+CREATE TABLE CLIENTE (
+    id_cliente          INT          PRIMARY KEY AUTO_INCREMENT,
+    cedula              VARCHAR(10)  NOT NULL UNIQUE,
+    nombres             VARCHAR(60)  NOT NULL,
+    apellidos           VARCHAR(60)  NOT NULL,
+    correo_electronico  VARCHAR(100) CHECK (correo_electronico LIKE '%_@_%._%')
+);
+
+-- MESERO
+CREATE TABLE MESERO (
+    id_mesero  INT          PRIMARY KEY AUTO_INCREMENT,
+    cedula     VARCHAR(10)  NOT NULL UNIQUE,
+    nombres    VARCHAR(60)  NOT NULL,
+    apellidos  VARCHAR(60)  NOT NULL,
+    telefono   VARCHAR(15)
+);
+
+-- PEDIDO
+CREATE TABLE PEDIDO (
+    id_pedido     INT            PRIMARY KEY AUTO_INCREMENT,
+    fecha_pedido  DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    estado        VARCHAR(20)    NOT NULL DEFAULT 'PENDIENTE'
+                  CHECK (estado IN ('PENDIENTE','EN_PREPARACION','ENTREGADO','PAGADO','CANCELADO')),
+    total         DECIMAL(10,2)  NOT NULL DEFAULT 0.00 CHECK (total >= 0),
+    id_cliente    INT            NOT NULL,
+    id_mesero     INT            NOT NULL,
+    FOREIGN KEY (id_cliente) REFERENCES CLIENTE (id_cliente)
+        ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (id_mesero) REFERENCES MESERO (id_mesero)
+        ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+-- PAGO
+CREATE TABLE PAGO (
+    id_pago      INT            PRIMARY KEY AUTO_INCREMENT,
+    fecha_pago   DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    monto        DECIMAL(10,2)  NOT NULL CHECK (monto > 0),
+    metodo_pago  VARCHAR(30)    NOT NULL DEFAULT 'EFECTIVO'
+                 CHECK (metodo_pago IN ('EFECTIVO','TARJETA','TRANSFERENCIA')),
+    id_pedido    INT            NOT NULL UNIQUE,
+    FOREIGN KEY (id_pedido) REFERENCES PEDIDO (id_pedido)
+        ON UPDATE CASCADE ON DELETE RESTRICT
+);
