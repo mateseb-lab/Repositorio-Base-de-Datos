@@ -1,0 +1,38 @@
+-- CLIENTE
+INSERT INTO CLIENTE (id_cliente, cedula, nombres, apellidos, correo_electronico)
+VALUES
+    (1, '1100112233', 'Juan',  'Pérez Loaiza',       'juan.perez@unl.edu.ec'),
+    (2, '1100223344', 'Ana',   'Granda Torres',      'ana.granda@gmail.com'),
+    (3, '1100334455', 'Pedro', 'Ríos Salinas',       NULL),
+    (4, '1100445566', 'Lucía', 'Campoverde Vivanco', 'lucia.campoverde@hotmail.com'),
+    (5, '1100556677', 'Mateo', 'Vega Castillo',      'mateo.vega@outlook.com');
+
+-- MESERO
+INSERT INTO MESERO (id_mesero, cedula, nombres, apellidos, telefono)
+VALUES
+    (1, '1104567890', 'Carlos', 'Andrade',   '0991234567'),
+    (2, '1105678901', 'María',  'Jaramillo', '0987654321'),
+    (3, '1103456789', 'Luis',   'Armijos',   '0976543210'),
+    (4, '1106789012', 'Andrea', 'Cueva',     NULL),
+    (5, '1102345678', 'Diego',  'Ordóñez',   '0965432109');
+
+-- PEDIDO
+INSERT INTO MESERO (id_mesero, cedula, nombres, apellidos, telefono)
+VALUES
+    (1, '1104567890', 'Carlos', 'Andrade',   '0991234567'),
+    (2, '1105678901', 'María',  'Jaramillo', '0987654321'),
+    (3, '1103456789', 'Luis',   'Armijos',   '0976543210'),
+    (4, '1106789012', 'Andrea', 'Cueva',     NULL),
+    (5, '1102345678', 'Diego',  'Ordóñez',   '0965432109');
+    (6, '2026-11-06 12:50:00', 'PAGADO', 31.00, 2, 2),
+    (7, '2026-11-07 21:10:00', 'PAGADO', 56.40, 4, 3),
+    (8, '2026-11-08 13:25:00', 'PAGADO', 12.00, 1, 1);
+
+-- PAGO
+INSERT INTO PAGO (id_pago, fecha_pago, monto, metodo_pago, id_pedido)
+VALUES
+    (1, '2026-11-02 13:05:00', 24.50, 'EFECTIVO',      1),
+    (2, '2026-11-02 13:50:00', 18.75, 'TARJETA',       2),
+    (3, '2026-11-06 13:30:00', 31.00, 'TRANSFERENCIA', 6),
+    (4, '2026-11-07 22:00:00', 56.40, 'TARJETA',       7),
+    (5, '2026-11-08 14:00:00', 12.00, 'EFECTIVO',      8);
